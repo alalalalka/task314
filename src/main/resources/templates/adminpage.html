@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>All users</title>
+</head>
+<body>
+<div>
+    <h1>Table of users</h1>
+    <!--<a th:href="@{/cars/{model}(model=${car.getModel()})}" th:text="${car.getModel()}">model</a>-->
+    <table border="2">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Edit user</th>
+            <th>Delete user</th>
+        </tr>
+        <tr>
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.getId}"></td>
+            <td th:utext="${user.getUsername()}"></td>
+            <td th:utext="${user.getLastname()}"></td>
+            <td th:utext="${user.getAge()}"></td>
+            <td th:utext="${user.getEmail()}"></td>
+            <td th:utext="${user.getRole()}"></td>
+            <td><a th:href="@{admin/edit/{id}(id=${user.getId()})}"><input type="submit" value="Edit"/></a></td>
+            <td><form th:method="DELETE" th:action="@{admin/delete/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete"/></form> </td>
+        </tr>
+    </table>
+
+    <h2>Add new user</h2>
+    <a href="/admin/new"><input type="submit" value="Add new user"/></a>
+    <a href="/logout"><input type="submit" value="Logout"></a>
+
+
+</div>
+</body>
+</html>
