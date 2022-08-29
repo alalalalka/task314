@@ -31,7 +31,7 @@ public class User implements UserDetails {
     @Column(name="password")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     private Set<Role> roles;
 
     public User() {
@@ -110,6 +110,7 @@ public class User implements UserDetails {
     public void setRole(String role) {
         this.role = role;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
