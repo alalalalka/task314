@@ -5,16 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
+import ru.kata.spring.boot_security.demo.service.UserService;
+
 
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public AdminController(UserServiceImpl userService) {
+    public AdminController(UserService userService) {
         this.userService = userService;
     }
 
