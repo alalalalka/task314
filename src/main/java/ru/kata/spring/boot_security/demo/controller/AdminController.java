@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.UDetailsService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+import java.security.Principal;
 
 
 @Controller
@@ -13,20 +16,26 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 public class AdminController {
 
     private final UserService userService;
+    private final UDetailsService uDetailsService;
 
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, UDetailsService uDetailsService) {
         this.userService = userService;
+        this.uDetailsService = uDetailsService;
     }
 
     @GetMapping
-    public String showTableOfUsers(Model model) {
+    public String showTableOfUsers(Model model, Principal principal) {
+        model.addAttribute("userInHeader", userService.findUserByUsername(principal.getName()));
+        model.addAttribute("userWithRoleAdmin", userService.findUserByUsername(principal.getName()));
         model.addAttribute("users", userService.allUsers());
+        model.addAttribute("roles", userService.getRoleList());
         return "adminpage";
     }
 
     @GetMapping("/new")
-    public String AddNewUser(Model model) {
+    public String AddNewUser(Model model, Principal principal) {
+        model.addAttribute("userInHeader", userService.findUserByUsername(principal.getName()));
         model.addAttribute("user", new User());
         model.addAttribute("roles", userService.getRoleList());
         return "new";
@@ -45,9 +54,9 @@ public class AdminController {
         return "edit";
     }
 
-    @PostMapping("{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.updateUser(user);
+    @PostMapping("/{id}")
+    public String updateUser(@ModelAttribute User user, @PathVariable("id") int id) {
+        userService.addUser(user);
         return "redirect:/admin";
     }
 

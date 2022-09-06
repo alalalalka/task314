@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -21,4 +22,6 @@ public interface UserService {
     void deleteUserById(int id);
 
     List<Role> getRoleList();
+
+    User findUserByUsername(String username) throws UsernameNotFoundException;
 }

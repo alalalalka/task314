@@ -1,32 +1,74 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>User</title>
+  <meta charset="UTF-8">
+  <title>Admin panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>User</h1>
 
-<table border="2">
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Last name</th>
-        <th>Age</th>
-        <th>Email</th>
-        <th>Role</th>
-    </tr>
-    <tr>
-    <tr>
-        <td th:utext="${user.getId}"></td>
-        <td th:utext="${user.getUsername()}"></td>
-        <td th:utext="${user.getLastname()}"></td>
-        <td th:utext="${user.getAge()}"></td>
-        <td th:utext="${user.getEmail()}"></td>
-        <td th:utext="${user.getRole()}"></td>
-    </tr>
-</table>
+<nav class="navbar navbar-default" style="background-color: #343a40">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="text-left, text-light"><h5>
+        <div th:object="${userInHeader}">
+          <span class="align-middle font-weight-bold" th:text="${userInHeader.username}"></span>
+          <span class="align-middle" >with roles</span>
+          <span class="align-middle" th:text="${userInHeader.getRole()}"></span>
+        </div>
+      </h5></div>
+    </div>
+    <div class="text-right"><a class="text-muted" href="/logout">Logout</a></div>
+  </div>
+</nav>
 </br>
-<a href="/logout"><input type="submit" value="Logout"></a>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2" style="background-color: white">
+      <ul class="nav flex-column nav-pills">
+        <li><a class="nav-link active" data-toggle="tab" href="#userPanel">User</a></li>
+      </ul>
+    </div>
+    <div class="col-md-10" style="background-color: #f8f9fa" id="userPanel">
+      <h1>User information-page</h1>
+      <div class="card">
+        <div class="card-header">
+          <div  style="background-color: #f7f7f7">
+            <h5>About user</h5>
+          </div>
+        </div>
+        <div class="card-body" style="background-color: white">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Age</th>
+              <th>Email</th>
+              <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td th:utext="${user.getId}"></td>
+              <td th:utext="${user.getUsername()}"></td>
+              <td th:utext="${user.getLastname()}"></td>
+              <td th:utext="${user.getAge()}"></td>
+              <td th:utext="${user.getEmail()}"></td>
+              <td th:utext="${user.getRole()}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

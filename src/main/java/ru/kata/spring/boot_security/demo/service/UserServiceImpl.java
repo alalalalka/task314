@@ -1,7 +1,9 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.Role;
@@ -66,5 +68,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Role> getRoleList() {
         return roleRepository.findAll();
+    }
+
+    @Override
+    public User findUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("Пользователь %s не найден.", username)));
+        user.getRoles().size();
+        Hibernate.initialize(user.getRoles());
+        return user;
     }
 }

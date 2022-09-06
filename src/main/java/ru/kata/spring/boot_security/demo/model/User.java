@@ -26,12 +26,13 @@ public class User implements UserDetails {
     private int age;
     @Column(name="email")
     private String email;
-    @Column(name="role")
-    private String role;
     @Column(name="password")
     private String password;
 
     @ManyToMany()
+    @JoinTable (name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
 
     public User() {
@@ -103,13 +104,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
 
     @Override
@@ -136,4 +130,9 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public String getRole(){
+        return roles.toString().replaceAll("^\\[|\\]$", "");
+    }
+
 }
