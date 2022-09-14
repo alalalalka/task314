@@ -130,6 +130,17 @@ formEdit.addEventListener('submit', e => {
 
 })
 
+document.addEventListener('click', e => {
+    if (e.target.closest('#btnEdit')) {
+        $("#ModalEdit").modal("hide");
+    }
+})
+document.addEventListener('click', e => {
+    if (e.target.closest('#btnEdit2')) {
+        $("#ModalEdit").modal("hide");
+    }
+})
+
 ////////////////////////////Delete////////////////////////////
 
 const formDelete = document.getElementById('formDelete')
@@ -144,7 +155,16 @@ formDelete.addEventListener('submit', e => {
     formDelete.reset();
 })
 
-
+document.addEventListener('click', e => {
+    if (e.target.closest('#btnDelete')) {
+        $("#deleteModal").modal("hide");
+    }
+})
+document.addEventListener('click', e => {
+    if (e.target.closest('#btnDelete2')) {
+        $("#deleteModal").modal("hide");
+    }
+})
 ////////////////////////////Add////////////////////////////
 
 const formAdd = document.getElementById("formNewUser");
