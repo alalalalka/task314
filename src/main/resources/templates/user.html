@@ -53,15 +53,7 @@
               <th>Role</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-              <td th:utext="${user.getId}"></td>
-              <td th:utext="${user.getUsername()}"></td>
-              <td th:utext="${user.getLastname()}"></td>
-              <td th:utext="${user.getAge()}"></td>
-              <td th:utext="${user.getEmail()}"></td>
-              <td th:utext="${user.getRole()}"></td>
-            </tr>
+            <tbody id="oneUserTable2">
             </tbody>
           </table>
         </div>
@@ -69,6 +61,6 @@
     </div>
   </div>
 </div>
-
+<script type="text/javascript" th:src="@{/oneUser.js}" defer="defer" src="/static/oneUser.js."></script>
 </body>
 </html>
