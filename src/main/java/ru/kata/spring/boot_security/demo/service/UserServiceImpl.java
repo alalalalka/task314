@@ -76,7 +76,6 @@ public class UserServiceImpl implements UserService {
                 .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Пользователь %s не найден.", username)));
         user.getRoles().size();
-        Hibernate.initialize(user.getRoles());
         return user;
     }
 }

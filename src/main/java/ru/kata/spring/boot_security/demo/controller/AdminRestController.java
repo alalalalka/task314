@@ -25,12 +25,6 @@ public class AdminRestController {
         return ResponseEntity.ok(userService.allUsers());
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<User> getUser(){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        int userId = user.getId();
-        return ResponseEntity.ok(userService.findUserById(userId));
-    }
 
     @PostMapping("/admin/users/new")
     public ResponseEntity<User> addNewUser(@RequestBody User user){
